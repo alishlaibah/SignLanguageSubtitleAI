@@ -90,59 +90,17 @@ while True:
     if result.multi_hand_landmarks:
         for hand in result.multi_hand_landmarks:
             mp_drawing.draw_landmarks(frame, hand, connections=mp_hands.HAND_CONNECTIONS)
+
     
-    record = cv2.waitKey(1)
-    my_array = []
-    if record == ord("1"):
-        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.WRIST]
-        my_array.extend([lm.x, lm.y, lm.z])
-        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.THUMB_CMC]
-        my_array.extend([lm.x, lm.y, lm.z])
-        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.THUMB_MCP]
-        my_array.extend([lm.x, lm.y, lm.z])
-        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.THUMB_IP]
-        my_array.extend([lm.x, lm.y, lm.z])
-        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.THUMB_TIP]
-        my_array.extend([lm.x, lm.y, lm.z])
-        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.INDEX_FINGER_MCP]
-        my_array.extend([lm.x, lm.y, lm.z])
-        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.INDEX_FINGER_PIP]
-        my_array.extend([lm.x, lm.y, lm.z])
-        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.INDEX_FINGER_DIP]
-        my_array.extend([lm.x, lm.y, lm.z])
-        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP]
-        my_array.extend([lm.x, lm.y, lm.z])
-        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.MIDDLE_FINGER_MCP]
-        my_array.extend([lm.x, lm.y, lm.z])
-        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.MIDDLE_FINGER_PIP]
-        my_array.extend([lm.x, lm.y, lm.z])
-        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.MIDDLE_FINGER_DIP]
-        my_array.extend([lm.x, lm.y, lm.z])
-        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP]
-        my_array.extend([lm.x, lm.y, lm.z])
-        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.RING_FINGER_MCP]
-        my_array.extend([lm.x, lm.y, lm.z])
-        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.RING_FINGER_PIP]
-        my_array.extend([lm.x, lm.y, lm.z])
-        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.RING_FINGER_DIP]
-        my_array.extend([lm.x, lm.y, lm.z])
-        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.RING_FINGER_TIP]
-        my_array.extend([lm.x, lm.y, lm.z])
-        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.PINKY_MCP]
-        my_array.extend([lm.x, lm.y, lm.z])
-        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.PINKY_PIP]
-        my_array.extend([lm.x, lm.y, lm.z])
-        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.PINKY_DIP]
-        my_array.extend([lm.x, lm.y, lm.z])
-        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.PINKY_TIP]
-        my_array.extend([lm.x, lm.y, lm.z])
+        hand = result.multi_hand_landmarks[0]
+        my_array = []    
+    
+        for lm in hand.landmark:
+            my_array.extend([lm.x, lm.y, lm.z])
 
-        my_array.append(0)
-
-    elif record == ord("1"):
-        break
-
-    print(my_array)
+        record = cv2.waitKey(1)
+        key = chr(record).lower()
+        print(my_array)
     
     # Display the frame
     cv2.imshow("Cam", frame)
