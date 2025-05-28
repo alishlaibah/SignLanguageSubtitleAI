@@ -28,48 +28,6 @@ webcam.set(cv2.CAP_PROP_FPS, 30)
 webcam.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
 webcam.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
-# Function to print all landmarks of a specific hand landmark
-def print_all_landmarks(landmark):
-    if (landmark == "Wrist"):
-            print("Wrist coordinates:")
-            print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.WRIST])
-    elif (landmark == "Thumb"):
-        print("Thumb coordinates:")
-        print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.THUMB_CMC])
-        print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.THUMB_MCP])
-        print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.THUMB_IP])
-        print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.THUMB_TIP])
-    elif (landmark == "Index"):
-        print("Index coordinates:")
-        print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.INDEX_FINGER_MCP])
-        print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.INDEX_FINGER_PIP])
-        print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.INDEX_FINGER_DIP])
-        print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP])
-    elif (landmark == "Middle"):
-        print("Middle coordinates:")
-        print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.MIDDLE_FINGER_MCP])
-        print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.MIDDLE_FINGER_PIP])
-        print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.MIDDLE_FINGER_DIP])
-        print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP])
-    elif (landmark == "Ring"):
-        print("Ring coordinates:")
-        print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.RING_FINGER_MCP])
-        print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.RING_FINGER_PIP])
-        print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.RING_FINGER_DIP])
-        print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.RING_FINGER_TIP])
-    elif (landmark == "Pinky"):
-        print("Pinky coordinates:")
-        print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.PINKY_MCP])
-        print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.PINKY_PIP])
-        print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.PINKY_DIP])
-        print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.PINKY_TIP])
-    elif (landmark == "All"):
-        print("All landmarks coordinates:")
-        for i, lm in enumerate(result.multi_hand_landmarks[0].landmark):
-            print(f"{mp_hands.HandLandmark(i).name}: {lm}")
-    else:
-        print("Invalid landmark name. Please choose from: Wrist, Thumb, Index, Middle, Ring, Pinky, or All.")
-
 
 
 while True:
@@ -94,16 +52,20 @@ while True:
     
         hand = result.multi_hand_landmarks[0]
         my_array = []    
-    
+
+        # Extracting all landmarks coordinates and appending to my_array (64 values)
         for lm in hand.landmark:
             my_array.extend([lm.x, lm.y, lm.z])
 
         record = cv2.waitKey(1)
+
         key = chr(record).lower()
         print(my_array)
     
     # Display the frame
     cv2.imshow("Cam", frame)
+
+
 
     key = cv2.waitKey(1)
     if key == ord("q"): 
