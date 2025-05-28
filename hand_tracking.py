@@ -63,8 +63,12 @@ def print_all_landmarks(landmark):
         print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.PINKY_PIP])
         print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.PINKY_DIP])
         print(result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.PINKY_TIP])
+    elif (landmark == "All"):
+        print("All landmarks coordinates:")
+        for i, lm in enumerate(result.multi_hand_landmarks[0].landmark):
+            print(f"{mp_hands.HandLandmark(i).name}: {lm}")
     else:
-        print("Invalid landmark name. Please choose from: Wrist, Thumb, Index, Middle, Ring, Pinky.")
+        print("Invalid landmark name. Please choose from: Wrist, Thumb, Index, Middle, Ring, Pinky, or All.")
 
 
 
@@ -86,16 +90,67 @@ while True:
     if result.multi_hand_landmarks:
         for hand in result.multi_hand_landmarks:
             mp_drawing.draw_landmarks(frame, hand, connections=mp_hands.HAND_CONNECTIONS)
+    
+    record = cv2.waitKey(1)
+    my_array = []
+    if record == ord("1"):
+        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.WRIST]
+        my_array.extend([lm.x, lm.y, lm.z])
+        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.THUMB_CMC]
+        my_array.extend([lm.x, lm.y, lm.z])
+        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.THUMB_MCP]
+        my_array.extend([lm.x, lm.y, lm.z])
+        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.THUMB_IP]
+        my_array.extend([lm.x, lm.y, lm.z])
+        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.THUMB_TIP]
+        my_array.extend([lm.x, lm.y, lm.z])
+        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.INDEX_FINGER_MCP]
+        my_array.extend([lm.x, lm.y, lm.z])
+        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.INDEX_FINGER_PIP]
+        my_array.extend([lm.x, lm.y, lm.z])
+        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.INDEX_FINGER_DIP]
+        my_array.extend([lm.x, lm.y, lm.z])
+        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP]
+        my_array.extend([lm.x, lm.y, lm.z])
+        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.MIDDLE_FINGER_MCP]
+        my_array.extend([lm.x, lm.y, lm.z])
+        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.MIDDLE_FINGER_PIP]
+        my_array.extend([lm.x, lm.y, lm.z])
+        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.MIDDLE_FINGER_DIP]
+        my_array.extend([lm.x, lm.y, lm.z])
+        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP]
+        my_array.extend([lm.x, lm.y, lm.z])
+        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.RING_FINGER_MCP]
+        my_array.extend([lm.x, lm.y, lm.z])
+        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.RING_FINGER_PIP]
+        my_array.extend([lm.x, lm.y, lm.z])
+        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.RING_FINGER_DIP]
+        my_array.extend([lm.x, lm.y, lm.z])
+        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.RING_FINGER_TIP]
+        my_array.extend([lm.x, lm.y, lm.z])
+        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.PINKY_MCP]
+        my_array.extend([lm.x, lm.y, lm.z])
+        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.PINKY_PIP]
+        my_array.extend([lm.x, lm.y, lm.z])
+        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.PINKY_DIP]
+        my_array.extend([lm.x, lm.y, lm.z])
+        lm = result.multi_hand_landmarks[0].landmark[mp_hands.HandLandmark.PINKY_TIP]
+        my_array.extend([lm.x, lm.y, lm.z])
 
-            print_all_landmarks("Wrist")
+        my_array.append(0)
+
+    elif record == ord("1"):
+        break
+
+    print(my_array)
     
     # Display the frame
     cv2.imshow("Cam", frame)
-    
+
     key = cv2.waitKey(1)
     if key == ord("q"): 
         break
 
 # Release the webcam and close all OpenCV windows
 webcam.release()
-cv2.destroyAllWindows()
+cv2.destroyAllWindows()    
