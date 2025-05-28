@@ -57,10 +57,7 @@ while True:
         for lm in hand.landmark:
             my_array.extend([lm.x, lm.y, lm.z])
 
-        record = cv2.waitKey(1)
-
-        key = chr(record).lower()
-        print(my_array)
+        # Will work on storing coordinates in a file and labelling them if a key is pressed
     
     # Display the frame
     cv2.imshow("Cam", frame)
