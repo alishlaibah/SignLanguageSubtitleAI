@@ -5,6 +5,15 @@ import logging
 import cv2
 import mediapipe as mp
 
+all_samples = []  # This will store your full dataset in memory
+label_map = {
+    'a': 0, 'b': 1, 'c': 2, 'd': 3, 'e': 4, 'f': 5,
+    'g': 6, 'h': 7, 'i': 8, 'j': 9, 'k': 10, 'l': 11,
+    'm': 12, 'n': 13, 'o': 14, 'p': 15, 'q': 16, 'r': 17,
+    's': 18, 't': 19, 'u': 20, 'v': 21, 'w': 22, 'x': 23,
+    'y': 24, 'z': 25
+}
+
 # remove TensorFlow and MediaPipe logs 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 logging.getLogger('mediapipe').setLevel(logging.ERROR)
@@ -48,14 +57,24 @@ while True:
     if result.multi_hand_landmarks:
         for hand in result.multi_hand_landmarks:
             mp_drawing.draw_landmarks(frame, hand, connections=mp_hands.HAND_CONNECTIONS)
+        
+        letter = cv2.waitKey(1)
+        try:
+            letter = chr(letter).lower()
+        except:
+            letter = ""
 
-    
-        hand = result.multi_hand_landmarks[0]
-        my_array = []    
+        if letter in label_map:
+            hand = result.multi_hand_landmarks[0]
+            my_array = []    
 
         # Extracting all landmarks coordinates and appending to my_array (64 values)
-        for lm in hand.landmark:
-            my_array.extend([lm.x, lm.y, lm.z])
+            for lm in hand.landmark:
+                my_array.extend([lm.x, lm.y, lm.z])
+
+            my_array.append(label_map[letter]) 
+            all_samples.append(my_array)
+            print(f"Sample saved for letter '{letter.upper()}")
 
         # Will work on storing coordinates in a file and labelling them if a key is pressed
     
@@ -65,7 +84,8 @@ while True:
 
 
     key = cv2.waitKey(1)
-    if key == ord("q"): 
+    if key == ord("q"):
+        print(all_samples)
         break
 
 # Release the webcam and close all OpenCV windows
