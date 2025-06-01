@@ -76,7 +76,6 @@ while True:
             all_samples.append(my_array)
             print(f"Sample saved for letter '{letter.upper()}")
 
-        # Will work on storing coordinates in a file and labelling them if a key is pressed
     
     # Display the frame
     cv2.imshow("Cam", frame)
