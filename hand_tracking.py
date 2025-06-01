@@ -5,7 +5,7 @@ import logging
 import cv2
 import mediapipe as mp
 
-all_samples = []  # This will store your full dataset in memory
+all_samples = []
 label_map = {
     'a': 0, 'b': 1, 'c': 2, 'd': 3, 'e': 4, 'f': 5,
     'g': 6, 'h': 7, 'i': 8, 'j': 9, 'k': 10, 'l': 11,
