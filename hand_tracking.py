@@ -4,6 +4,7 @@ import os
 import logging
 import cv2
 import mediapipe as mp
+import numpy as np
 
 all_samples = []
 label_map = {
@@ -72,6 +73,7 @@ while True:
             for lm in hand.landmark:
                 my_array.extend([lm.x, lm.y, lm.z])
 
+            # Append the label for the letter to my_array & save the sample
             my_array.append(label_map[letter]) 
             all_samples.append(my_array)
             print(f"Sample saved for letter '{letter.upper()}")
@@ -84,7 +86,7 @@ while True:
 
     key = cv2.waitKey(1)
     if key == ord("q"):
-        print(all_samples)
+        np.save("A_samples.npy", np.array(all_samples))  # Save the 'A' test samples as an NumPy array to 'A_samples.npy' (for model training)
         break
 
 # Release the webcam and close all OpenCV windows
