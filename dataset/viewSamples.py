@@ -1,3 +1,6 @@
 import numpy as np
 
-print(np.load("notA.npy"))
+notA = np.load("notA.npy")
+A = np.load("A.npy")
+print(notA.shape)
+print(A.shape)
