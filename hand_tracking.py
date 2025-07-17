@@ -84,7 +84,7 @@ while True:
 
     key = cv2.waitKey(1)
     if key == ord("q"):
-        np.save("notA.npy", np.array(all_samples))  
+        # np.save("notA.npy", np.array(all_samples))  
         break
 
 # Release the webcam and close all OpenCV windows

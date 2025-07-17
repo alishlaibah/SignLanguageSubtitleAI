@@ -5,19 +5,14 @@ import numpy as np
 A = np.load("A.npy")
 notA = np.load("notA.npy")
 
-# print("A shape:", A.shape)
-# print("notA shape:", notA.shape)
+print(A.shape)
+print(notA.shape)
 
-# print(A)
-# print(notA)
-
+# Combine the two arrays
 allData = np.vstack((A, notA))
+
+# Split features and labels for training
 X = allData[:, :-1]  # Features
 Y = allData[:, -1]   # Labels
 
-print(X)
-print(Y)
-
-
-X_scaled = StandardScaler().fit_transform(X)  # Features
-print(X_scaled)
+X_scaled = StandardScaler().fit_transform(X)  # Feature scaling
