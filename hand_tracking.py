@@ -39,7 +39,7 @@ webcam.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
 
 while True:
-    success, frame = webcam.read() # success tells us if the webcam is working, frame is webcams image
+    success, frame = webcam.read() # Success tells us if the webcam is working, frame is webcams image
 
     # Applying hand tracking model
     # Convert frame from BGR (OpenCV default) to RGB which is required for MediaPipe
@@ -79,8 +79,6 @@ while True:
     
     # Display the frame
     cv2.imshow("Cam", frame)
-
-
 
     key = cv2.waitKey(1)
     if key == ord("q"):
