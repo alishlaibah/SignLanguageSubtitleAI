@@ -5,4 +5,4 @@ A project to translate sign language gestures into real-time subtitles using AI 
 
 This project uses MediaPipe hand landmark coordinates as shown below:
 
-![Hand Landmarks](Images/hand_landmarks.png)
+![Hand Landmarks](images/hand_landmarks.png)
