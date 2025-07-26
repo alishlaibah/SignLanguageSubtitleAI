@@ -1,9 +1,10 @@
 from sklearn.preprocessing import StandardScaler
 import numpy as np
+import os
 
 # Load the saved NumPy arrays
-A = np.load("A.npy")
-notA = np.load("notA.npy")
+A = np.load("dataset/A.npy")
+notA = np.load("dataset/notA.npy")
 
 print(A.shape)
 print(notA.shape)
@@ -15,4 +16,6 @@ allData = np.vstack((A, notA))
 X = allData[:, :-1]  # Features
 Y = allData[:, -1]   # Labels
 
-X_scaled = StandardScaler().fit_transform(X)  # Feature scaling
+scaler = StandardScaler() 
+X_scaled = scaler.fit_transform(X)  # Feature scaling
+__all__ = ['X_scaled', 'Y', 'scaler']
