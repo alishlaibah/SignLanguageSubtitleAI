@@ -51,6 +51,7 @@ while True:
         for lm in hand.landmark:
             my_array.extend([lm.x, lm.y, lm.z])
 
+        # Feeding the array to the model
         if len(my_array) == 63:
             my_array = np.array(my_array).reshape(1, -1)
             my_array_scaled = scaler.transform(my_array)
