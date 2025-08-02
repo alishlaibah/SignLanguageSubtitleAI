@@ -6,8 +6,8 @@ import numpy as np
 import joblib
 from tensorflow.keras.models import load_model
 
-model = load_model("models/mlp_model.h5")
-scaler = joblib.load("models/scaler.pkl")
+model = load_model("backend/saved_models/mlp_model.h5")
+scaler = joblib.load("backend/saved_models/scaler.pkl")
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 logging.getLogger('mediapipe').setLevel(logging.ERROR)
