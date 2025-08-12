@@ -31,7 +31,7 @@ webcam = cv2.VideoCapture(1)
 webcam.set(cv2.CAP_PROP_FPS, 30)
 webcam.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
 webcam.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
-
+    
 
 
 while True:
