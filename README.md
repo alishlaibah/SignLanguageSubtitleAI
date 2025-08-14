@@ -7,9 +7,9 @@ Quick demo of my Sign Language  Subtitle AI detecting the letter A.
 ## Demo
 
 <p align="center">
-  <img src="images/demo.GIF" alt="Sign Language AI Demo" width="600"/>
+  <img src="images/demo.gif" alt="Sign Language AI Demo" width="400"/>
+  <img src="images/A_reference.png" alt="ASL Letter A Reference" width="200"/>
 </p>
-
 ## Hand Landmarks Reference
 
 This project uses MediaPipe hand landmark coordinates as shown below:
