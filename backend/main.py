@@ -10,8 +10,8 @@ class LandmarksRequest(BaseModel):
     landmarks: List[float]
 
 
+app.middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"],)
+
 @app.post("/predict")
 def get_prediction(request: LandmarksRequest):
     return predict(request.landmarks)
-
-app.middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"],)
