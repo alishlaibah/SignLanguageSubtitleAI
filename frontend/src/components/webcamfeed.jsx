@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
-import { Hands } from '@mediapipe/hands';
+import { Hands , HAND_CONNECTIONS} from '@mediapipe/hands';
+import {drawConnectors, drawLandmarks} from '@mediapipe/drawing_utils';
 
 function WebcamFeed() {
     const videoRef = useRef(null); // grab HTML video element
@@ -35,12 +36,27 @@ function WebcamFeed() {
         });
 
         hands.onResults((results) => {
+            const videoEl = videoRef.current;
+            const canvasEl = canvasRef.current;
+
+            if (!videoEl || !canvasEl) return;
+
+            const ctx = canvasEl.getContext('2d');
+
+            canvasEl.width = videoEl.videoWidth;
+            canvasEl.height = videoEl.videoHeight;
+
+            ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
+
+            ctx.drawImage(videoEl, 0, 0, canvasEl.width, canvasEl.height);
+
             if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
-                const firstHand = results.multiHandLandmarks[0];
-                console.log("Hand landmakrs:", firstHand);
-            } else {
-                console.log("No hand detected");
+                for (const landmarks of results.multiHandLandmarks) {
+                    drawConnectors(ctx, landmarks, HAND_CONNECTIONS, {color: 'white', lineWidth: 2,});
+                    drawLandmarks(ctx, landmarks, {color: 'red', radius: 3,});
+                }
             }
+            
         });
 
 
