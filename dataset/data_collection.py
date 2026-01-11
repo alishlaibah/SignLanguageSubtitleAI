@@ -6,7 +6,7 @@ import numpy as np
 
 all_samples = []
 label_map = {
-    ' ' : 0, 'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, # mapped space to 0 so I can collect notA samples
+    ' ' : 0, 'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6,
     'g': 7, 'h': 8, 'i': 9, 'j': 10, 'k': 11, 'l': 12,
     'm': 13, 'n': 14, 'o': 15, 'p': 16, 'q': 17, 'r': 18,
     's': 19, 't': 20, 'u': 21, 'v': 22, 'w': 23, 'x': 24,
@@ -28,8 +28,8 @@ hands = mp_hands.Hands (
     min_detection_confidence = 0.9,
     min_tracking_confidence = 0.9
 )
-# Capture video from the webcam (change 0 or 1 depending on the device)
-webcam = cv2.VideoCapture(1)
+
+webcam = cv2.VideoCapture(0)
 
 # Optimize webcam settings to reduce jitter
 webcam.set(cv2.CAP_PROP_FPS, 30)
@@ -81,8 +81,8 @@ while True:
     cv2.imshow("Cam", frame)
 
     key = cv2.waitKey(1)
-    if key == ord("q"):
-        np.save("notA.npy", np.array(all_samples))  
+    if key == ord(" "):
+        np.save("J.npy", np.array(all_samples))
         break
 
 # Release the webcam and close all OpenCV windows

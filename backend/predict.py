@@ -6,7 +6,7 @@ import cv2
 
 
 model_path = os.path.join("backend", "saved_models", "asl_model.h5")
-scaler_path = os.path.join("backend", "saved_models", "scaler.save")
+scaler_path = os.path.join("backend", "saved_models", "scaler.pkl")
 
 model = load_model(model_path)
 scaler = joblib.load(scaler_path)
